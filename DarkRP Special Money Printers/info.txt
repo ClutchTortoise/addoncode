@@ -1,0 +1,6 @@
+"AddonInfo"
+{
+	"name" "DarkRP Special Money Printers"
+	"author_name" "author"
+	"info" "Entitie names: normal_money_printer ruby_money_printer gold_money_printer nuclear_money_printer , add these for DarkRP server or single player addentities.lua , this is only way to spawn them."
+}
