@@ -19,6 +19,7 @@ function ENT:Initialize()
 end
 
 function ENT:OnTakeDamage(dmg)
+
 	if self.burningup then return end
 
 	self.damage = (self.damage or 100) - dmg:GetDamage()
@@ -31,6 +32,7 @@ function ENT:OnTakeDamage(dmg)
 			self:Remove()
 		end
 	end
+	print("OnTakeDamage was called, printer health : "..self.damage)
 end
 
 function ENT:Destruct()
@@ -44,14 +46,20 @@ function ENT:Destruct()
 end
 
 function ENT:BurstIntoFlames()
+
+	print("Burst Into Flames was called.")
+	
 	GAMEMODE:Notify(self.dt.owning_ent, 1, 4, "Your money printer is overheating!")
 	self.burningup = true
 	local burntime = math.random(8, 18)
 	self:Ignite(burntime, 0)
-	timer.Simple(burntime, self:Fireball)
+	timer.Simple(burntime, function() self:Fireball() end)
 end
 
 function ENT:Fireball()
+
+	print("Fireball was called.")
+	
 	if not self:IsOnFire() then return end
 	local dist = math.random(2, 5) -- Explosion radius
 	self:Destruct()
@@ -79,8 +87,7 @@ end
 
 end
 
-
-
+print(GetNWInt("PrintA"))
 
 function ENT:CreateMoneybag()
 	if not IsValid(self) then return end
